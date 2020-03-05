@@ -48,12 +48,10 @@ matrix:
         - pod repo update
       script:
         - flutter doctor && flutter -v build ios --no-codesign
-      before_deploy:
-        - mkdir .ios/Outputs && mkdir .ios/Outputs/FlutterEngine
-        - cp FlutterEngine.podspec .ios/Outputs/
-        - cp -r .ios/Flutter/App.framework/ .ios/Outputs/FlutterEngine/App.framework/
-        - cp -r .ios/Flutter/engine/Flutter.framework/ .ios/Outputs/FlutterEngine/Flutter.framework/
-        - pushd .ios/Outputs && zip -r FlutterEngine.zip  ./ && popd
+      before_deploy: 
+        - mkdir app && mkdir app/Payload 
+        - cp -r build/ios/iphoneos/Runner.app app/Payload 
+        - pushd app && zip -r -m app.ipa Payload && popd
       deploy:
         provider: releases
         api_key: ${GITHUB_TOKEN}
