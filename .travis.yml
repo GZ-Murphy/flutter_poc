@@ -56,11 +56,11 @@ matrix:
         provider: releases
         api_key: ${GITHUB_TOKEN}
         file:
-          - .ios/Outputs/FlutterEngine.zip
+          - app/app.ipa
         skip_cleanup: true
         on:
           tags: true
-          all_branches: true
+          # all_branches: true
 before_install:
     - git clone -b 'v1.5.4-hotfix.2' --depth 1 https://github.com/flutter/flutter.git
     - export PATH="$PATH:`pwd`/flutter/bin"
